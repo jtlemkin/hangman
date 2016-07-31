@@ -5,7 +5,7 @@ class Hangman
 	def initialize
 		@word = get_words.sample
 		@guess = @word.gsub(/./, '_')
-		@attempts = 60
+		@attempts = 6
 		@used = []
 	end
 
@@ -35,9 +35,13 @@ class Hangman
 		puts "Pick a letter"
 		letter = gets.chomp.downcase
 
-		if /\w/.match(letter)
+		if @used.include?(letter)
+			puts "Sorry, that letter has already been used"
+			get_letter
+		elsif /\w/.match(letter)
 			letter[0]
 		else
+			puts "Sorry, your input is invalid"
 			get_letter
 		end
 	end
